@@ -216,9 +216,9 @@ class Home {
             path: `${await appdata()}/${process.platform == 'darwin' ? this.config.dataDirectory : `.${this.config.dataDirectory}`}`,
             instance: options.name,
             version: options.loadder.minecraft_version,
-            detached: configClient.launcher_config.closeLauncher == "close-all" ? false : true,
-            downloadFileMultiple: configClient.launcher_config.download_multi,
-            intelEnabledMac: configClient.launcher_config.intelEnabledMac,
+            detached: configClient?.launcher_config?.closeLauncher == "close-all" ? false : true,
+            downloadFileMultiple: configClient?.launcher_config?.download_multi ?? false,
+            intelEnabledMac: configClient?.launcher_config?.intelEnabledMac ?? false,
 
             loader: {
                 type: options.loadder.loadder_type,
@@ -231,20 +231,20 @@ class Home {
             ignored: [...options.ignored],
 
             java: {
-                path: configClient.java_config.java_path,
+                path: configClient?.java_config?.java_path ?? '',
             },
 
             JVM_ARGS:  options.jvm_args ? options.jvm_args : [],
             GAME_ARGS: options.game_args ? options.game_args : [],
 
             screen: {
-                width: configClient.game_config.screen_size.width,
-                height: configClient.game_config.screen_size.height
+                width: configClient?.game_config?.screen_size?.width ?? 854,
+                height: configClient?.game_config?.screen_size?.height ?? 480
             },
 
             memory: {
-                min: `${configClient.java_config.java_memory.min * 1024}M`,
-                max: `${configClient.java_config.java_memory.max * 1024}M`
+                min: `${(configClient?.java_config?.java_memory?.min ?? 5) * 1024}M`,
+                max: `${(configClient?.java_config?.java_memory?.max ?? 10) * 1024}M`
             }
         }
 
@@ -293,7 +293,7 @@ class Home {
 
         launch.on('data', (e) => {
             progressBar.style.display = "none"
-            if (configClient.launcher_config.closeLauncher == 'close-launcher') {
+            if (configClient?.launcher_config?.closeLauncher == 'close-launcher') {
                 ipcRenderer.send("main-window-hide")
             };
             new logger('Minecraft', '#36b030');
@@ -303,7 +303,7 @@ class Home {
         })
 
         launch.on('close', code => {
-            if (configClient.launcher_config.closeLauncher == 'close-launcher') {
+            if (configClient?.launcher_config?.closeLauncher == 'close-launcher') {
                 ipcRenderer.send("main-window-show")
             };
             ipcRenderer.send('main-window-progress-reset')
@@ -324,7 +324,7 @@ class Home {
                 options: true
             })
 
-            if (configClient.launcher_config.closeLauncher == 'close-launcher') {
+            if (configClient?.launcher_config?.closeLauncher == 'close-launcher') {
                 ipcRenderer.send("main-window-show")
             };
             ipcRenderer.send('main-window-progress-reset')
