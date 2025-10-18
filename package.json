@@ -1,11 +1,11 @@
 {
-    "name": "SakuraMC-Launcher",
-    "preductname": "SakuraMC Launcher",
-    "version": "1.2.5",
-    "description": "Launcher Officiel de SakuraMC",
+    "name": "OniCore-Launcher",
+    "preductname": "OniCore Launcher",
+    "version": "1.2.6",
+    "description": "Launcher Officiel de OniCore",
     "main": "src/app.js",
     "author": {
-        "name": "luuxis, Inc. & SakuraMC Team",
+        "name": "luuxis, Inc. & OniCore Team",
         "email": "contact@luuxis.fr",
         "url": "https://github.com/SakuraMC-Fr"
     },
